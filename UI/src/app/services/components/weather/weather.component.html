@@ -1,0 +1,40 @@
+<div class="weather-container">
+
+  <h2>Weather</h2>
+
+  <form [formGroup]="weatherForm" (ngSubmit)="getData()">
+
+    <input
+      type="text"
+      formControlName="city"
+      placeholder="Enter city name"
+    >
+
+    <div class="error"
+      *ngIf="weatherForm.get('city')?.touched && weatherForm.get('city')?.invalid">
+      City is required
+    </div>
+
+    <button type="submit">
+      Get Weather
+    </button>
+
+  </form>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="weather" class="weather-card">
+
+    <h3>Location: {{ weather.name }}</h3>
+
+    <p>Temperature: {{ weather.main.temp }} °C</p>
+
+    <p>Condition: {{ weather.weather[0].main }}</p>
+
+    <p>Wind Speed: {{ weather.wind.speed }} km/h</p>
+
+  </div>
+
+</div>

@@ -1,0 +1,73 @@
+<div class="container">
+
+  <h2>Product Management</h2>
+
+  <!-- Form -->
+  <form [formGroup]="productForm" (ngSubmit)="save()" class="form">
+
+    <input
+      type="text"
+      placeholder="Product Name"
+      formControlName="name"
+    />
+
+    <div class="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+      Name is required
+    </div>
+
+    <input
+      type="number"
+      placeholder="Price"
+      formControlName="price"
+    />
+
+    <div class="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid">
+      Price is required
+    </div>
+
+    <input
+      type="text"
+      placeholder="Description"
+      formControlName="description"
+    />
+
+    <button type="submit">
+      Add Product
+    </button>
+
+  </form>
+
+  <hr />
+
+  <!-- List -->
+  <h3>Product List</h3>
+
+  <div class="list">
+
+   <div class="card" *ngFor="let p of products">
+
+  <h4>{{ p.name }}</h4>
+
+  <p>₹{{ p.price }}</p>
+
+  <p class="desc">{{ p.description }}</p>
+
+  <div class="actions">
+
+    <button class="edit" (click)="edit(p)">
+      Edit
+    </button>
+
+    <button class="delete" (click)="delete(p._id)">
+      Delete
+    </button>
+
+  </div>
+
+</div>
+  </div>
+  <p *ngIf="products.length === 0" class="empty">
+    No products available
+  </p>
+
+</div>
